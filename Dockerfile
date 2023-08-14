@@ -1,26 +1,17 @@
-# Use an official Python runtime as a base image
-FROM python:3.8
+FROM alpine: latest
 
-# Set the working directory within the container
-WORKDIR /app
+RUN apk update
 
-# Install Git
+RUN apk add python3 py3-pip
+
 RUN apt-get update && apt-get install -y git
 
+RUN git clone https://github.com/ManojUchiha02/S_Task1.git /app
 
-# Create a subdirectory for your project
-RUN mkdir my_project
+RUN mkdir app
 
-# Clone your source code from GitHub into the subdirectory
-RUN git clone https://github.com/ManojUchiha02/S_Task_1.git /app/my_project
+WORKDIR app
 
-# Set the working directory to the project subdirectory
-WORKDIR /app/my_project
+COPY app_code.py app/app_code.py
 
-RUN pip install selenium
-
-COPY chromedriver /app/my_project/chromedriver
-
-COPY Selenium_Fill.py /app/my_project/Selenium_Fill.py
-
-ENTRYPOINT ["python3", "Selenium_Fill.py"]
+ENTRYPOINT ["python3", "app_code.py"]
