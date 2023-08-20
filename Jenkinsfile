@@ -3,7 +3,7 @@ pipeline {
     environment {
         dockerImage = 's_task1' // Use the manually tagged image name
         registry = 'manoj2uchiha/s_task1'
-        registryCredential = 'dockerhub_id'
+        registryCredential = 'dockerhub_id1'
         // ...
     }
 
@@ -23,7 +23,7 @@ pipeline {
         script {
             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
                 def dockerImage = docker.image('s_task1:latest')
-                dockerImage.push()
+                    dockerImage.push()
             }
     }
             }
