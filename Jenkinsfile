@@ -22,8 +22,7 @@ pipeline {
     steps {
         script {
             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
-                def dockerImage = docker.image('s_task1:latest')
-                    dockerImage.push()
+                docker.image("${dockerImage}").push()
             }
     }
             }
