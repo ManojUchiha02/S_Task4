@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
-                    dockerImage.push()
+                    docker.image("s_task1:${env.BUILD_ID}").push()
                     }
                 }
             }
