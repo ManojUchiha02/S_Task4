@@ -4,7 +4,6 @@ pipeline {
         dockerImage = 's_task1' // Use the manually tagged image name
         registry = 'manoj2uchiha/s_task1'
         registryCredential = 'dockerhub_id'
-        DOCKER_HUB_CREDENTIAL = credentials('mnj@access')
         // ...
     }
 
