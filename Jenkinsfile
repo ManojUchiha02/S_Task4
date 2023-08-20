@@ -18,12 +18,12 @@ pipeline {
 }
 
         stage('Build Docker image') {
-            steps {
-                script {
-                    dockerImage = docker.build registry
-                }
-            }
+    steps {
+        script {
+            def dockerImage = docker.build("my-image-name:${env.BUILD_ID}")
         }
+    }
+}
 
         stage('Uploading Image') {
             steps {
