@@ -19,13 +19,13 @@ pipeline {
         }
 
         stage('Uploading Image') {
-            steps {
-                script {
-                    docker.withRegistry('', registryCredential) {
-                        // Push the manually tagged image to Docker Hub
-                        docker.image("${dockerImage}").push()
-                    }
-                }
+    steps {
+        script {
+            docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
+                def dockerImage = docker.image('s_task1:latest')
+                dockerImage.push()
+            }
+    }
             }
         }
     }
