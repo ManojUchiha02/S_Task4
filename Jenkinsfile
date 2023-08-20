@@ -7,11 +7,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+      stage('Checkout') {
+         steps {
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url:'https://github.com/ManojUchiha02/S_Task4.git']])
+         }
+      }
 
         stage('Build Docker image') {
             steps {
