@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_HUB_CREDENTIAL = credentials('your-docker-hub-access-token-credential-id')
+        DOCKER_HUB_CREDENTIAL = credentials('mnj@access')
         // ...
     }
 
