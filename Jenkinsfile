@@ -8,10 +8,14 @@ pipeline {
 
     stages {
       stage('Checkout') {
-         steps {
-            checkout scm(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url:'https://github.com/ManojUchiha02/S_Task4.git']])
-         }
-      }
+        steps {
+         checkout([
+            $class: 'GitSCM',
+            branches: [[name: '*/main']],
+            userRemoteConfigs: [[url: 'https://github.com/ManojUchiha02/S_Task4.git']]
+        ])
+    }
+}
 
         stage('Build Docker image') {
             steps {
@@ -24,8 +28,8 @@ pipeline {
         stage('Uploading Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
-                        dockerImage.push()
+                    docker.withRegistry('', registryCredential) {
+                    dockerImage.push()
                     }
                 }
             }
