@@ -3,7 +3,7 @@ pipeline {
     environment {
         dockerImage = 's_task1' // Use the manually tagged image name
         registry = 'manoj2uchiha/s_task1'
-        registryCredential = 'dockerhub_id1'
+        registryCredential = 'dockerhub_id'
         // ...
     }
 
