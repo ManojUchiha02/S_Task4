@@ -1,9 +1,8 @@
 pipeline {
     agent any
     environment {
-        dockerImage = ''  // Define a default value if needed
-        registry = 'manoj2uchiha/s_task1'
-        registryCredential = 'dockerhub_id'
+        DOCKER_REGISTRY = "https://index.docker.io/v1/"
+        DOCKERHUB_ACCESS_TOKEN = credentials('dockerhub_id')
     }
 
     stages {
@@ -28,7 +27,7 @@ pipeline {
         stage('Uploading Image') {
             steps {
                 script {
-                    docker.withRegistry('', registryCredential) {
+                    docker.withRegistry(DOCKER_REGISTRY, DOCKERHUB_ACCESS_TOKEN) {
                     dockerImage.push()
                     }
                 }
