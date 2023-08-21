@@ -1,50 +1,35 @@
 pipeline {
     agent any
-    environment {
-        dockerImage = ''  // Define a default value if needed
-        registry = 'manoj2uchiha/s_task1'
-        registryCredential = 'dockerhub_id'
-    }
-
-
     stages {
-        stage('Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/ManojUchiha02/S_Task4.git']]
-                ])
-            }
-        }
-
-        stage('Build Docker image') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("task4:v1")
+                    dockerfilePath = "C:\\Users\\Boya Manoj-2978\\Documents\\tasks\\GIT_JENKINS\\Dockerfile”
+                    buildContext = "C:\\Users\\Boya Manoj-2978\\Documents\\tasks\\GIT_JENKINS"
+                    imageName = "manoj2uchiha/test1"
+                    imageTag = "tagnamee"
+                    bat "docker build -t ${imageName}:${imageTag} -f \"${dockerfilePath}\" \"${buildContext}\""
                 }
             }
         }
-
-        stage('login') {
+        stage('List Docker Images') {
+            steps {
+                script {
+                    bat "docker images"
+                }
+            }
+        }
+        stage('Log In to Docker Hub') {
             steps {
                 script {
                     bat "docker login"
-                    }
                 }
             }
-        stage('tag') {
+        }
+        stage('Push the Image') {
             steps {
                 script {
-                    bat "docker tag task4:v1 manoj2uchiha/task4:v1
-                    }
-                }
-            }
-        stage('push') {
-            steps {
-                script {
-                    bat "docker push manoj2uchiha/task4:v1"
-                    }
+                    bat "docker push manoj2uchiha/test1:tagnamee"
                 }
             }
         }
