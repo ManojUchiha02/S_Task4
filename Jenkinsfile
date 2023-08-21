@@ -2,15 +2,13 @@ pipeline {
     agent any
     stages {
         stage('Build Docker Image') {
-            stage('Build Docker image') {
             steps {
                 script {
-                    docker.build("test1:latest", 
-                                 context: ".", 
-                                 dockerfile: "C:\\Users\\Boya Manoj-2978\\Documents\\tasks\\GIT_JENKINS\\Dockerfile")
-                    // imageName = "manoj2uchiha/test1"
-                    // imageTag = "tagnamee"
-                    // bat "docker build -t ${imageName}:${imageTag} -f \"${dockerfilePath}\" \"${buildContext}\""
+                    dockerfilePath = "C:\\Users\\Boya Manoj-2978\\Documents\\tasks\\GIT_JENKINS\\Dockerfile"
+                    buildContext = "C:\\Users\\Boya Manoj-2978\\Documents\\tasks\\GIT_JENKINS"
+                    imageName = "manoj2uchiha/s_task1"
+                    imageTag = "4"
+                    bat "docker build -t ${imageName}:${imageTag} -f \"${dockerfilePath}\" \"${buildContext}\""
                 }
             }
         }
@@ -31,7 +29,7 @@ pipeline {
         stage('Push the Image') {
             steps {
                 script {
-                    bat "docker push manoj2uchiha/test1:tagnamee"
+                    bat "docker push manoj2uchiha/s_task1:4"
                 }
             }
         }
