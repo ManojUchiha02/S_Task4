@@ -28,6 +28,7 @@ pipeline {
         stage('Uploading Image') {
             steps {
                 script {
+                    docker tag s_task1 manoj2uchiha/s_task1
                     docker.withRegistry('', registryCredential) {
                         dockerImage.push()
                     }
