@@ -21,16 +21,29 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 script {
-                    dockerImage = docker.build("s_task1")
+                    dockerImage = docker.build("task4:v1")
                 }
             }
         }
 
-        stage('Uploading Image') {
+        stage('login') {
             steps {
                 script {
-                    docker.withRegistry('', registryCredential) {
-                    dockerImage.push()
+                    bat "docker login"
+                    }
+                }
+            }
+        stage('tag') {
+            steps {
+                script {
+                    bat "docker tag task4:v1 manoj2uchiha/task4:v1
+                    }
+                }
+            }
+        stage('push') {
+            steps {
+                script {
+                    bat "docker push manoj2uchiha/task4:v1"
                     }
                 }
             }
