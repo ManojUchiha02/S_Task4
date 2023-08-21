@@ -20,15 +20,14 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 script {
-                    def dockerImage = docker.build("s_task1:36", ".")
-                    dockerImage.tag("s_task1:latest")
+                    dockerImage = docker.build("s_task1:${env.BUILD_ID}")
+                }
+            }
         }
-    }
-}
+
         stage('Uploading Image') {
             steps {
                 script {
-                    docker tag s_task1 manoj2uchiha/s_task1
                     docker.withRegistry('', registryCredential) {
                         dockerImage.push()
                     }
