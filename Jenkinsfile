@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        dockerImage = '' // You can remove this line, as dockerImage is defined later
+        dockerImage = ''  // Define a default value if needed
         registry = 'manoj2uchiha/s_task1'
         registryCredential = 'dockerhub_id'
     }
@@ -20,10 +20,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 script {
-                    def dockerImage = docker.build("s_task1:${env.BUILD_ID}") // Use 's_task1' as image name
-
-                    // Manually tag the image with the repository name
-                    dockerImage.tag("${registry}:${env.BUILD_ID}")
+                    dockerImage = docker.build("my-image-name:${env.BUILD_ID}")
                 }
             }
         }
@@ -32,8 +29,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
-                        // Push the tagged image to Docker Hub
-                        docker.image("${registry}:${env.BUILD_ID}").push()
+                        dockerImage.push()
                     }
                 }
             }
