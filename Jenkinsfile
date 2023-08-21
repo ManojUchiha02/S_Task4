@@ -20,8 +20,8 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 script {
-                    def dockerImage = docker.build("my-image-name:36", ".")
-                    dockerImage.tag("my-image-name:latest")
+                    def dockerImage = docker.build("s_task1:36", ".")
+                    dockerImage.tag("s_task1:latest")
         }
     }
 }
